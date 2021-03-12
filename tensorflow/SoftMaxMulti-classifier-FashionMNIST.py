@@ -15,7 +15,6 @@ print("test_image_shape:",test_image.shape)
 #训练之前将数据归一化，把从0-255改为从0-1
 train_image = train_image/255
 test_image = test_image/255
-
 # 优化，使用One-hot编码，可以从顺序编码直接转换。
 train_label_onehot = tf.keras.utils.to_categorical(train_label)
 test_label_onehot = tf.keras.utils.to_categorical(test_label)
@@ -36,7 +35,7 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),loss='cate
 #
 # # 模型训练
 # # 在训练过程中还提示测试数据的变化，使用validation_data
-history = model.fit(train_image,train_label_onehot,epochs=10,validation_data=(test_image,test_label_onehot))
+history = model.fit(train_image,train_label_onehot,epochs=1000,validation_data=(test_image,test_label_onehot))
 #
 # print(history.history.keys())
 #

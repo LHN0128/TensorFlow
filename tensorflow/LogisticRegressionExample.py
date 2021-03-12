@@ -3,15 +3,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 #读取数据集,如果第一行就是数据而没有表头，那么就添加header=None参数
-data = pd.read_csv(r'E:\PyCharm Projects\Test\data\credit-a.csv',header=None)
+data = pd.read_csv(r'E:\PyCharm Projects\TensorFlow\data\credit-a.csv',header=None)
 print(data.head())
 #查看是或不是的分布情况
 print(data.iloc[:, -1].value_counts())
 # 提取输入x和输出y。这里把-1换成0来表示负面数据
 x = data.iloc[:,:-1]
 y = data.iloc[:,-1].replace(-1,0)
-
-
+print(x.shape)
+print(y.shape)
+print(y)
 model = tf.keras.Sequential()
 #第一层要告诉输入数据的形状，input_shape，15个数据输入,后面每一个隐藏层都是10个结点
 model.add(tf.keras.layers.Dense(10,input_shape=(15,),activation='relu'))

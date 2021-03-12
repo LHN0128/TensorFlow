@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 print(tf.test.is_gpu_available())
 
-((train_image ,train_label),(test_image, test_label)) = tf.keras.datasets.fashion_mnist.load_data()
+((train_image ,train_label),(test_image, test_label)) = tf.keras.datasets.mnist.load_data()
 print(train_image.shape)
 print(train_label.shape)
 #对图像扩充维度处理，添加一个维度，最后一个维度为通道数

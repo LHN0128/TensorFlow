@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 #读取是数据集
-data = pd.read_csv(r'E:\PyCharm Projects\Test\data\Advertising.csv')
+data = pd.read_csv(r'E:\PyCharm_Projects\TensorFlow\data\Advertising.csv')
 print(data.head())
 #绘制TV和sales之间的关系。通过绘制不同的图来发现不同变量对sales的关系。
 plt.scatter(data.TV,data.sales)

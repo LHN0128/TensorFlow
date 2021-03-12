@@ -24,7 +24,7 @@ test_label_onehot = tf.keras.utils.to_categorical(test_label)
 model = tf.keras.Sequential()
 model.add(tf.keras.layers.Flatten(input_shape=(28,28)))
 #两个隐藏层
-model.add(tf.keras.layers.Dense(128,activation='relu'))
+model.add(tf.keras.layers.Dense(256,activation='relu'))
 model.add(tf.keras.layers.Dropout(0.5))
 model.add(tf.keras.layers.Dense(128,activation='relu'))
 model.add(tf.keras.layers.Dropout(0.5))
