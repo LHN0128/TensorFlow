@@ -24,13 +24,16 @@ train_input3 = input3.iloc[:, :9225]
 train_output3 = output3.iloc[:,:]
 print(train_input3.shape)
 print(train_output3.shape)
-test_input3 = input3.iloc[1672:, :9225]
-test_output3 = output3.iloc[1672:,:]
-print(test_input3.shape)
-print(test_output3.shape)
+# test_input3 = input3.iloc[1672:, :9225]
+# test_output3 = output3.iloc[1672:,:]
+# print(test_input3.shape)
+# print(test_output3.shape)
+print(train_output3.max() - train_output3.min())
+print(train_output3.min())
 train_output3 = (train_output3 - train_output3.min()) / (train_output3.max() - train_output3.min())
-test_output3 = (test_output3 - test_output3.min()) / (test_output3.max() - test_output3.min())
 
+# test_output3 = (test_output3 - test_output3.min()) / (test_output3.max() - test_output3.min())
+#
 train_input_list3 = [train_input3]
 train_input_list3 = np.concatenate(train_input_list3, axis=0)
 train_input_list3 = train_input_list3.reshape(1, 2090, 9225)
@@ -49,18 +52,23 @@ model3 = tf.keras.Sequential()
 
 forwardLayer = tf.keras.layers.LSTM(64, return_sequences=True)
 backwardLayer = tf.keras.layers.LSTM(64, return_sequences=True,go_backwards=True)
-model3.add(tf.keras.layers.Bidirectional(forwardLayer,backward_layer=backwardLayer,merge_mode="concat", input_shape=(None,9225)))
-model3.add(tf.keras.layers.Dense(1024, activation='swish'))
-model3.add(tf.keras.layers.Dropout(0.5))
-model3.add(tf.keras.layers.Dense(64, activation='swish'))
-model3.add(tf.keras.layers.Dropout(0.5))
+model3.add(tf.keras.layers.Bidirectional(forwardLayer,backward_layer=backwardLayer,input_shape=(None,9225)))
+
+model3.add(tf.keras.layers.Dense(512, activation='sigmoid'))
+model3.add(tf.keras.layers.Dropout(0.2))
+model3.add(tf.keras.layers.Dense(128, activation='sigmoid'))
+model3.add(tf.keras.layers.Dropout(0.2))
+# model3.add(tf.keras.layers.Dense(32, activation='sigmoid'))
+# model3.add(tf.keras.layers.Dropout(0.2))
 model3.add(tf.keras.layers.Dense(12, activation='swish'))
 
 
 model3.summary()
 
-model3.compile(optimizer="adam", loss="mse")
-history3 = model3.fit(train_input_list3, train_output_list3, epochs=150)
+model3.compile(optimizer=tf.keras.optimizers.Adam(0.001), loss="mae")
+
+history3 = model3.fit(train_input_list3, train_output_list3, epochs=300)
 model3.save(r"E:\PyCharm_Projects\TensorFlow\Query\models\MyThreeQueryModel.h5")
-plt.plot(history3.epoch,history3.history.get("loss"))
+plt.plot(history3.epoch,history3.history.get("loss"),label="loss")
+plt.legend();
 plt.show()

@@ -67,6 +67,5 @@ history = model.fit(train_input_list, train_output_list,validation_data=(test_in
 
 plt.plot(history.epoch,history.history.get("acc"),label="acc")
 plt.plot(history.epoch,history.history.get("val_acc"),label="val_acc")
-plt.title("MPL = 4")
 plt.legend();
 plt.show();

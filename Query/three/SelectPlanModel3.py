@@ -25,8 +25,8 @@ train_input3 = input3.iloc[:1672, :]
 train_output3 = output3.iloc[:1672,:]
 test_input3 = input3.iloc[1672:, :]
 test_output3 = output3.iloc[1672:,:]
-train_output3 = (train_output3 - train_output3.min()) / (train_output3.max() - train_output3.min())
-test_output3 = (test_output3 - test_output3.min()) / (test_output3.max() - test_output3.min())
+# train_output3 = (train_output3 - train_output3.min()) / (train_output3.max() - train_output3.min())
+# test_output3 = (test_output3 - test_output3.min()) / (test_output3.max() - test_output3.min())
 
 train_input_list3 = [train_input3]
 train_input_list3 = np.concatenate(train_input_list3, axis=0)
@@ -67,9 +67,8 @@ history3 = model3.fit(train_input_list3, train_output_list3,validation_data=(tes
 
 
 
-plt.plot(history3.epoch,history3.history.get("val_acc"),label="MPL=3",color="b")
+plt.plot(history3.epoch,history3.history.get("acc"),label="acc")
+plt.plot(history3.epoch,history3.history.get("val_acc"),label="val_acc")
 
-
-plt.title("MPL = 3时 测试集精度")
 plt.legend();
 plt.show();
